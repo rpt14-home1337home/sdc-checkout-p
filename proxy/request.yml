@@ -1,0 +1,21 @@
+config:
+  target: 'http://localhost:3000'
+  processor: "./utility/artillery.js"
+  http:
+    pool: 200
+  phases:
+    - duration: 60
+      arrivalRate: 1
+scenarios:
+  - flow:
+    - function: "generateRandomPropId"
+    - loop:
+      # - post:
+      #     url: "/checkout/book/{{ id }}"
+      #     json:
+      #       checkin: "2019-11-12"
+      #       checkout: "2019-11-17"
+      # count: 100
+      - get:
+          url: "/checkout/prop/{{ id }}"
+      count: 1
